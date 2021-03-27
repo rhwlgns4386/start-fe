@@ -33,9 +33,6 @@
 
     function show(event){
         for(var i=start; i<end; i++){
-        if(i+1==todayPhoto.length){
-            wraplist[i-start+1].innerHTML='';
-        }
         if(event==undefined){
             span=document.createElement("span");
             span.style="display:inline-block; width:110px";
@@ -43,27 +40,30 @@
             wrap.appendChild(span);
         }
         else{
-            wraplist[i-start].innerHTML='<img src="'+todayPhoto[i].img+'"> '+"<p>"+todayPhoto[i].title+"</p>";
+            console.log(i%7);
+            wraplist[i-start].innerHTML='<img src="'+todayPhoto[i%8].img+'"> '+"<p>"+todayPhoto[i%7].title+"</p>";
         }
     }
 }
 
     function btnEvent(event){
         if(event.srcElement.id=='nextButton'){
-            if(end+1<todayPhoto.length){
             start=end;
-            end=end+parseInt(todayPhoto.length/end+1);
-            count+=1;
+            end+=3;
+            count=count%3+1;
             number.innerText=count+"/3";
-            }
         }
         else if(event.srcElement.id=='backButton'){
-            if(start>0){
-            end=start;
-            start=start-3
-            count-=1;
+            end=start
+            if(end<3){
+                end=8-end;
+            }
+            start=end-3
+            count=count-1
+            if(count==0){
+                count=3;
+            }
             number.innerText=count+"/3";
-            }   
         }
         show(event);
     }
