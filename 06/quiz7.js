@@ -10,11 +10,31 @@ var flag=false;
 var speed=2000;
 var time;
 
+
+function lifedie(){
+    if(life>0){
+        life-=1
+        $life.innerText=life;
+    }
+    if(life===0){
+        clearInterval(time);
+        alert("게임오버");
+        $bug.removeEventListener("click",bugClick)
+        $box.removeEventListener("click",boxClick)
+        return;
+    }
+}
+
 function randomMake(){
     bug.style.left=`${Math.random() *(max -min) }px`;
     bug.style.top=`${Math.random() *(max - min)}px`;
+    if(flag==false){
+        lifedie();
+        return;
+    }
     flag=false;
 }
+
 function bugClick(event){
     if(!flag){
         point+=1
@@ -24,16 +44,10 @@ function bugClick(event){
     event.stopPropagation();
 }
 function boxClick(){
-    if(life>0){
-        life-=1
-        $life.innerText=life;
-    }
-    if(life===0){
-        clearInterval(time);
-        alert("게임오버")
-        return;
-    }
+    lifedie()
 }
+
+
 
 time=setInterval(randomMake,speed);
 $bug.addEventListener("click",bugClick)
