@@ -10,7 +10,6 @@ var flag=false;
 var speed=2000;
 var time;
 
-
 function lifedie(){
     if(life>0){
         life-=1
@@ -46,8 +45,6 @@ function bugClick(event){
 function boxClick(){
     lifedie()
 }
-
-
 
 time=setInterval(randomMake,speed);
 $bug.addEventListener("click",bugClick)
