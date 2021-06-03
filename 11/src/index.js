@@ -1,16 +1,12 @@
 import "./todos.css";
+
+import{loadData} from'./data-manager';
 import {render} from './html-render';
 import input from './input';
 
 const $result = document.querySelector('#result');
 
-const todos=[
-{
-    id:'1',
-    text:'js공부',
-    isDone:false,
-}
-];
+const todos = loadData();
 
 $result.addEventListener('click',(event)=>{
     const className=(event.target.className);
